@@ -11,6 +11,7 @@ This directory contains the Zero-Knowledge (ZK) multilateral (N-party) netting c
 ## Proving Constraints
 
 The circuit enforces five distinct constraints during proof generation:
+
 1. **Gross Position Derivation:** Proves that each party's public net receivable and payable balances match the private obligation matrix.
 2. **Anti-Self-Dealing:** Asserts that there are no self-obligations (the diagonal of the obligation matrix is zero).
 3. **Clean Net Position:** Asserts that each counterpart is either a net receiver or a net payer, but not both (`net_pos[i] * net_neg[i] == 0`).
@@ -19,13 +20,13 @@ The circuit enforces five distinct constraints during proof generation:
 
 ## Signal Map
 
-| Parameter | Type | Visibility | Description |
-|---|---|---|---|
-| `net_pos` | `[Field; 4]` | **Public** | Netted receivable amounts for each counterpart |
-| `net_neg` | `[Field; 4]` | **Public** | Netted payable amounts for each counterpart |
-| `session_nullifier` | `Field` (Return) | **Public** | Unique session nullifier binding net balances |
-| `obligations` | `[Field; 16]` | **Private** | Private gross obligation matrix ($N \times N$) |
-| `session_secret` | `Field` | **Private** | Secret value to prevent pre-computation attacks |
+| Parameter           | Type             | Visibility  | Description                                     |
+| ------------------- | ---------------- | ----------- | ----------------------------------------------- |
+| `net_pos`           | `[Field; 4]`     | **Public**  | Netted receivable amounts for each counterpart  |
+| `net_neg`           | `[Field; 4]`     | **Public**  | Netted payable amounts for each counterpart     |
+| `session_nullifier` | `Field` (Return) | **Public**  | Unique session nullifier binding net balances   |
+| `obligations`       | `[Field; 16]`    | **Private** | Private gross obligation matrix ($N \times N$)  |
+| `session_secret`    | `Field`          | **Private** | Secret value to prevent pre-computation attacks |
 
 ## Development Commands
 
@@ -40,6 +41,7 @@ nargo test
 ```
 
 To run the full end-to-end proving and verification demo, run the following command from the project root:
+
 ```bash
 npm run prove:demo:multinet
 ```

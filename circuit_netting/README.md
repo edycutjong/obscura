@@ -11,6 +11,7 @@ This directory contains the Zero-Knowledge (ZK) bilateral invoice netting circui
 ## Proving Constraints
 
 The circuit enforces five distinct constraints during proof generation:
+
 1. **Distinct Counterparties:** Asserts that the two counterparties differ (`party_a_address != party_b_address`).
 2. **Positive Invoices:** Asserts that all active invoice amounts are positive (greater than zero).
 3. **Bilateral Conservation:** Proves that the public `net_amount` is equal to the difference of private receivables and payables (`net_amount + total_payables == total_receivables`).
@@ -19,18 +20,18 @@ The circuit enforces five distinct constraints during proof generation:
 
 ## Signal Map
 
-| Parameter | Type | Visibility | Description |
-|---|---|---|---|
-| `net_amount` | `Field` | **Public** | Netted settlement amount (positive means Party A receives) |
-| `party_a_address` | `Field` | **Public** | Address of counterparty A |
-| `party_b_address` | `Field` | **Public** | Address of counterparty B |
-| `invoice_count` | `Field` | **Public** | Number of active invoices to process (1..8) |
-| `session_nullifier` | `Field` (Return 0) | **Public** | Unique double-netting prevention nullifier |
-| `batch_commitment` | `Field` (Return 1) | **Public** | Cryptographic hash binding the set of invoice IDs |
-| `receivable_amounts` | `[Field; 8]` | **Private** | Secret amounts owed TO Party A FROM Party B |
-| `payable_amounts` | `[Field; 8]` | **Private** | Secret amounts owed BY Party A TO Party B |
-| `invoice_ids` | `[Field; 8]` | **Private** | Secret unique invoice identifiers |
-| `netting_secret` | `Field` | **Private** | Secret key for nullifier generation |
+| Parameter            | Type               | Visibility  | Description                                                |
+| -------------------- | ------------------ | ----------- | ---------------------------------------------------------- |
+| `net_amount`         | `Field`            | **Public**  | Netted settlement amount (positive means Party A receives) |
+| `party_a_address`    | `Field`            | **Public**  | Address of counterparty A                                  |
+| `party_b_address`    | `Field`            | **Public**  | Address of counterparty B                                  |
+| `invoice_count`      | `Field`            | **Public**  | Number of active invoices to process (1..8)                |
+| `session_nullifier`  | `Field` (Return 0) | **Public**  | Unique double-netting prevention nullifier                 |
+| `batch_commitment`   | `Field` (Return 1) | **Public**  | Cryptographic hash binding the set of invoice IDs          |
+| `receivable_amounts` | `[Field; 8]`       | **Private** | Secret amounts owed TO Party A FROM Party B                |
+| `payable_amounts`    | `[Field; 8]`       | **Private** | Secret amounts owed BY Party A TO Party B                  |
+| `invoice_ids`        | `[Field; 8]`       | **Private** | Secret unique invoice identifiers                          |
+| `netting_secret`     | `Field`            | **Private** | Secret key for nullifier generation                        |
 
 ## Development Commands
 
@@ -45,6 +46,7 @@ nargo test
 ```
 
 To run the full end-to-end proving and verification demo, run the following command from the project root:
+
 ```bash
 npm run prove:demo:netting
 ```

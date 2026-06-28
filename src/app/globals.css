@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* Import Design Tokens */
-@import '../../docs/assets/_tokens.css';
+@import './_tokens.css';
 
 :root {
   --font-display: var(--font-orbitron), 'Orbitron', sans-serif;
