@@ -1,0 +1,8 @@
+net_amount = "3500"
+party_a_address = "111"
+party_b_address = "222"
+invoice_count = "3"
+receivable_amounts = ["5000", "3000", "2000", "1", "1", "1", "1", "1"]
+payable_amounts = ["4000", "1000", "1500", "1", "1", "1", "1", "1"]
+invoice_ids = ["10", "20", "30", "1", "1", "1", "1", "1"]
+netting_secret = "99999"

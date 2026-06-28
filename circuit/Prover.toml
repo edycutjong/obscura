@@ -1,0 +1,7 @@
+due_date = "2000000000"
+buyer_address = "111"
+seller_address = "222"
+invoice_amount = "50000"
+credit_line = "100000"
+invoice_id = "777"
+payment_timestamp = "1700000000"

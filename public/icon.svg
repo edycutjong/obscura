@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#2e1065"/>
+      <stop offset="60%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#02040a"/>
+    </radialGradient>
+    
+    <!-- Purple metallic gradient -->
+    <linearGradient id="purpleBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#6b21a8"/>
+    </linearGradient>
+
+    <!-- Glowing violet neon gradient -->
+    <linearGradient id="neonPurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d8b4fe"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <linearGradient id="laserGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Advanced Glow Filters -->
+    <filter id="epicGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="15" result="blur1"/>
+      <feGaussianBlur stdDeviation="6" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+    <style>
+    .floater2 {
+      transform: translate(190px, 190px);
+    }
+
+    .scanner {
+      display: none;
+    }
+  </style>
+
+  <!-- Base Cyber Background -->
+  <rect width="512" height="512" rx="90" fill="url(#bgGrad)"/>
+  
+  <!-- Outer Cyber Border -->
+  <rect width="504" height="504" x="4" y="4" rx="86" fill="none" stroke="#1e293b" stroke-width="3"/>
+  <rect width="504" height="504" x="4" y="4" rx="86" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-opacity="0.4" filter="url(#epicGlow)"/>
+
+  <!-- Ambient Light Pulse -->
+  <circle cx="256" cy="256" r="180" fill="#a855f7" opacity="0.3" filter="url(#epicGlow)" class="ambient-glow"/>
+
+  <!-- HUD Rotator 1 -->
+  <g class="hud-ring-1" opacity="0.25" style="animation: rotateHUD 25s linear infinite; transform-origin: 256px 256px;">
+    <circle cx="256" cy="256" r="220" fill="none" stroke="#a855f7" stroke-width="2" stroke-dasharray="100 40 20 40 80 50"/>
+    <circle cx="256" cy="256" r="200" fill="none" stroke="#c084fc" stroke-width="1" stroke-dasharray="10 15 30 10"/>
+  </g>
+
+  <!-- Back Invoice Document (Floating) -->
+  <g class="floater1">
+    <rect x="120" y="120" width="200" height="250" rx="24" fill="none" stroke="url(#purpleBody)" stroke-width="18" stroke-linejoin="round" opacity="0.4" filter="url(#epicGlow)"/>
+    <line x1="160" y1="180" x2="280" y2="180" stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+    <line x1="160" y1="240" x2="240" y2="240" stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+  </g>
+
+  <!-- Front Invoice Document (Floating offset) -->
+  <g class="floater2">
+    <rect x="0" y="0" width="200" height="250" rx="24" fill="#0f172a" stroke="#ffffff" stroke-width="16" stroke-linejoin="round" filter="url(#epicGlow)"/>
+    <rect x="0" y="0" width="200" height="250" rx="24" fill="none" stroke="url(#purpleBody)" stroke-width="6" stroke-linejoin="round"/>
+    <line x1="40" y1="60" x2="160" y2="60" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+    <line x1="40" y1="120" x2="120" y2="120" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+    <line x1="40" y1="180" x2="160" y2="180" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+
+    <!-- Scanning line overlay inside the front document -->
+    <g opacity="0.5" clip-path="url(#docClip)">
+      <g class="scanner">
+        <line x1="0" y1="0" x2="200" y2="0" stroke="#c084fc" stroke-width="4" filter="url(#epicGlow)"/>
+        <polygon points="0,0 200,0 180,20 20,20" fill="url(#laserGrad)"/>
+      </g>
+    </g>
+
+    <!-- Small lock badge over front document -->
+    <g transform="translate(145, 195)" filter="url(#epicGlow)">
+      <rect x="0" y="8" width="20" height="15" rx="3" fill="#a855f7" stroke="#ffffff" stroke-width="1.5"/>
+      <path d="M4,8 L4,3 A6,6 0 0,1 16,3 L16,8" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <clipPath id="docClip">
+    <rect x="6" y="6" width="188" height="238" rx="18"/>
+  </clipPath>
+</svg>
