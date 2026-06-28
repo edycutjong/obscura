@@ -44,7 +44,7 @@
     "prettier": "^3.0.0",
     "tsx": "^4.22.4",
     "ts-node": "^10.9.2",
-    "@lhci/cli": "^0.14.0"
+    "@lhci/cli": "^0.15.1"
   },
   "nyc": {
     "all": true,
