@@ -115,6 +115,22 @@ export default function Home() {
           <a href="#faq" className="hover:text-white transition-colors">
             FAQ
           </a>
+          <a
+            href="https://github.com/edycutjong/obscura"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            GITHUB
+          </a>
+          <a
+            href="/pitch.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            PITCH DECK
+          </a>
         </nav>
 
         <button
@@ -148,12 +164,28 @@ export default function Home() {
           prevent double-factoring fraud natively on-ledger using Zero-Knowledge range-proofs.
         </p>
 
-        <div className="flex gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <a
             href="#demo"
             className="bg-linear-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-sm py-3 px-8 rounded-lg shadow-lg shadow-cyan-500/20 border border-white/10 transition-all font-display tracking-widest"
           >
             LAUNCH DEMO
+          </a>
+          <a
+            href="/pitch.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 font-bold text-sm py-3 px-8 rounded-lg transition-all font-display tracking-widest"
+          >
+            PITCH DECK
+          </a>
+          <a
+            href="https://github.com/edycutjong/obscura"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-bold text-sm py-3 px-8 rounded-lg transition-all font-display tracking-widest"
+          >
+            GITHUB
           </a>
           <a
             href="#features"

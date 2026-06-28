@@ -239,6 +239,12 @@ _Benchmarks ran locally using the Soroban Rust SDK test environment (Protocol 26
 - [x] Phase 7a: Multilateral netting graph — **shipped & verified on-chain.** Real `multinet_circuit` Noir circuit (N=4 party obligation graph → per-party netted positions, zero-diagonal, clean-net split, system conservation `sum net_pos == sum net_neg`, Poseidon session nullifier; gross obligations stay private) → UltraHonk proof → on-chain `verify_netting_proof` against a dedicated multilateral VK on testnet contract `CCAFMYQOOKT4VRRBJK2DVZBY3VHX5IAD2A3UYJCEE2WVYRYIRO4MIJED`. Reproduce: `npm run prove:demo:multinet` (real proof → `true`, tampered inputs → `false`). Verified offline (`bb verify`) + on-chain.
 - [ ] Phase 7b: Supply-chain-finance integration — _designed, not deployed (requires external SCF / financing rails)_
 
+## 📽️ Demo Materials
+
+- **GitHub Repository**: [https://github.com/edycutjong/obscura](https://github.com/edycutjong/obscura)
+- **Live App URL**: [https://obscura.edycu.dev](https://obscura.edycu.dev)
+- **Pitch Deck**: [https://obscura.edycu.dev/pitch.html](https://obscura.edycu.dev/pitch.html)
+
 ---
 
 ## 📄 License
