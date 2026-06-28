@@ -52,7 +52,7 @@
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "prettier": "^3.0.0",
+    "prettier": "^3.9.1",
     "tsx": "^4.22.4",
     "ts-node": "^10.9.2",
     "@lhci/cli": "^0.14.0"
