@@ -166,11 +166,11 @@ Underlying verifier contract using Protocol 26 host functions:
 
 - `verify_proof(env: Env, vk_bytes: Bytes, proof_bytes: Bytes, public_inputs: Bytes) -> bool`: Verifies a Noir/UltraHonk proof against the provided verification key and public inputs.
 
-### 🔭 Roadmap — designed, NOT deployed on the contracts above
+### 🔭 v3 extensions — deployed as dedicated contracts, not wired into the demo web app
 
-> **Honest status:** the deployed settlement contract verifies the v1 invoice range/nullifier UltraHonk proof only (`settle_invoice`). The item below is **design-stage**: `settle_netting_v3` is **not deployed**, and `circuit/src/netting.nr` is **not compiled, proven, or wired** — there is no dedicated netting circuit yet (it would reuse the v1 verifier).
+> **Honest status:** the v1 settlement contract verifies the invoice range/nullifier UltraHonk proof (`settle_invoice`). The v3 bilateral netting (`circuit_netting`) and multilateral netting (`circuit_multinet`) ship as **separate, dedicated contracts** with their own VKs, verified on Stellar testnet and reproducible from the CLI (see Roadmap below). They are **not wired into the hosted demo web app**, which demos the v1 flow only.
 
-- `settle_netting_v3(...)` **[planned v3]** — Bilateral invoice netting: a single atomic transfer settling N invoices between two counterparties via a ZK proof that the net amount is correct (`net_amount + total_payables == total_receivables`), with session-nullifier + batch-commitment replay protection. Backing circuit `circuit/src/netting.nr` is design-stage only.
+- `settle_netting_v3(...)` **[v3, shipped]** — Bilateral invoice netting: a single atomic transfer settling N invoices between two counterparties via a ZK proof that the net amount is correct (`net_amount + total_payables == total_receivables`), with session-nullifier + batch-commitment replay protection, against a dedicated netting VK on testnet contract `CBNM47QOFFPWY4HVIIVF5TSLQ65J7TZB54JX7FR7KKYEQMYYUOJHSOA2`. Reproduce: `npm run prove:demo:netting`.
 
 ## 🧪 Testing & CI
 
