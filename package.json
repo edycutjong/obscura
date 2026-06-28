@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/edycutjong/obscura/issues"
   },
-  "homepage": "https://github.com/edycutjong/obscura#readme",
+  "homepage": "https://obscura.edycu.dev",
   "engines": {
     "node": ">=22.0.0"
   },
