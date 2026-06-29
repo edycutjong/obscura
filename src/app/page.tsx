@@ -198,21 +198,21 @@ export default function Home() {
         {/* Social Proof Stats */}
         <div className="grid grid-cols-3 gap-8 md:gap-16 mt-8 font-mono border-t border-white/5 pt-8 w-full max-w-2xl">
           <div>
-            <div className="text-2xl md:text-3xl font-black text-white">$100M+</div>
+            <div className="text-2xl md:text-3xl font-black text-white">UltraHonk</div>
             <div className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">
-              Settle Cap.
+              Noir Prover
             </div>
           </div>
           <div>
-            <div className="text-2xl md:text-3xl font-black text-cyan-400 glow-text">&lt;150ms</div>
+            <div className="text-2xl md:text-3xl font-black text-cyan-400 glow-text">BN254</div>
             <div className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">
-              Verifier Speed
+              Protocol 26
             </div>
           </div>
           <div>
-            <div className="text-2xl md:text-3xl font-black text-purple-400">100%</div>
+            <div className="text-2xl md:text-3xl font-black text-purple-400">Poseidon2</div>
             <div className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">
-              Fraud Blocked
+              Nullifier Guard
             </div>
           </div>
         </div>

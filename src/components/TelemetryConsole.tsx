@@ -10,7 +10,7 @@ interface TelemetryData {
     verifier: string;
     usdc: string;
   };
-  active_nullifiers: number;
+  verify_entrypoint: string;
   protocol_version: number;
 }
 
@@ -103,10 +103,10 @@ export default function TelemetryConsole() {
         </div>
         <div className="bg-black/20 p-3 rounded-lg border border-white/5">
           <div className="text-[10px] text-gray-500 uppercase tracking-widest">
-            Active Nullifiers
+            Verify Entrypoint
           </div>
           <div className="text-sm font-bold text-purple-400 mt-1">
-            {data.active_nullifiers} registered
+            {data.verify_entrypoint}
           </div>
         </div>
       </div>

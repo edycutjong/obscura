@@ -47,6 +47,14 @@ Traditional B2B supply chains moving to public blockchains face major data liabi
   <img src="public/og-image.png" alt="Obscura Visualizer" width="100%">
 </div>
 
+<div align="center">
+  <img src="docs/screenshots/04-tokenize-invoice.png" alt="Obscura — tokenize a B2B invoice with encrypted metadata" width="32%">
+  <img src="docs/screenshots/05-buyer-console-load.png" alt="Obscura — buyer console & confidential settlement" width="32%">
+  <img src="docs/screenshots/06-prove-and-settle.png" alt="Obscura — prove & settle the invoice privately on-chain" width="32%">
+  <br/>
+  <sub><em>Invoice tokenization &amp; confidential settlement (demo sandbox). Reproduce the real proof with <code>npm run prove:demo</code>.</em></sub>
+</div>
+
 The confidential settlement flow represents **one core pipeline executed with extreme depth**:
 
 ```mermaid
