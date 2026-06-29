@@ -88,6 +88,25 @@ graph TD
 
 ---
 
+## ✅ Proof of On-Chain Verification (reproduce it)
+
+`npm run prove:demo` compiles the Noir circuit, generates a **fresh** UltraHonk proof, and verifies it live on Stellar testnet — valid proof ⇒ `true`, tampered inputs ⇒ `false`. Example run:
+
+```text
+Compiling Noir circuit + solving witness...
+Generating real UltraHonk proof (Barretenberg, keccak oracle)...
+Proof verified successfully
+Submitting on-chain verify_invoice_proof to CD6BRQ7OB3AEDGZPR6JP5ZI6HZGCQ3OTCFVDAELN7QKQF3XRAXPXW3RO ...
+on-chain verify_invoice_proof => true
+on-chain verify_invoice_proof (tampered) => false
+
+✅ Real Noir/UltraHonk invoice proof verified on-chain; tampered proof rejected.
+```
+
+- **Settlement contract (testnet):** [`CD6BRQ7O…XW3RO`](https://stellar.expert/explorer/testnet/contract/CD6BRQ7OB3AEDGZPR6JP5ZI6HZGCQ3OTCFVDAELN7QKQF3XRAXPXW3RO)
+
+---
+
 ## 🏗️ Architecture & Tech Stack
 
 | Layer                 | Technology                           | Description                                                 |

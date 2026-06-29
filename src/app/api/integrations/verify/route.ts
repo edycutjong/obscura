@@ -7,12 +7,16 @@ export async function GET() {
     contracts: {
       settlement:
         process.env.NEXT_PUBLIC_SETTLEMENT_CONTRACT_ID ||
-        'CB3JSL356S7WLX7P73L5J5Z6R4M5Y3H2R7OWSS492',
+        'CD6BRQ7OB3AEDGZPR6JP5ZI6HZGCQ3OTCFVDAELN7QKQF3XRAXPXW3RO',
       verifier:
-        process.env.NEXT_PUBLIC_VERIFIER_CONTRACT_ID || 'CC4M5Y3H2R7OWSS7L5J5Z6R4M5Y3H2R7OWTTT102',
-      usdc: process.env.NEXT_PUBLIC_USDC_CONTRACT_ID || 'CD7XN55P4K2GWS6N233JSL356S7WLX7P73L5J5Z6',
+        process.env.NEXT_PUBLIC_VERIFIER_CONTRACT_ID ||
+        'CD6BRQ7OB3AEDGZPR6JP5ZI6HZGCQ3OTCFVDAELN7QKQF3XRAXPXW3RO',
+      usdc:
+        process.env.NEXT_PUBLIC_USDC_CONTRACT_ID ||
+        'CCY6VUXEZ6IJZ5AMOBBPB6GYFRDKDRM6D5NR5SGLCIM3AAM3XDODSIXN',
     },
-    active_nullifiers: 105,
+    verify_entrypoint: 'verify_invoice_proof',
+    note: 'Real Noir/UltraHonk invoice verification is reproduced via `npm run prove:demo`.',
     protocol_version: 26,
   });
 }
