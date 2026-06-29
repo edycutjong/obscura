@@ -105,9 +105,7 @@ export default function TelemetryConsole() {
           <div className="text-[10px] text-gray-500 uppercase tracking-widest">
             Verify Entrypoint
           </div>
-          <div className="text-sm font-bold text-purple-400 mt-1">
-            {data.verify_entrypoint}
-          </div>
+          <div className="text-sm font-bold text-purple-400 mt-1">{data.verify_entrypoint}</div>
         </div>
       </div>
 
@@ -118,15 +116,21 @@ export default function TelemetryConsole() {
         <div className="bg-black/30 p-3 rounded-lg flex flex-col gap-3.5 border border-white/5">
           <div className="flex flex-col gap-1">
             <span className="text-gray-500 text-[10px] uppercase tracking-wider">Verifier:</span>
-            <span className="text-cyan-400 select-all break-all font-mono text-[10px] leading-normal">{data.contracts.verifier}</span>
+            <span className="text-cyan-400 select-all break-all font-mono text-[10px] leading-normal">
+              {data.contracts.verifier}
+            </span>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-gray-500 text-[10px] uppercase tracking-wider">Settlement:</span>
-            <span className="text-cyan-400 select-all break-all font-mono text-[10px] leading-normal">{data.contracts.settlement}</span>
+            <span className="text-cyan-400 select-all break-all font-mono text-[10px] leading-normal">
+              {data.contracts.settlement}
+            </span>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-gray-500 text-[10px] uppercase tracking-wider">USDC Token:</span>
-            <span className="text-cyan-400 select-all break-all font-mono text-[10px] leading-normal">{data.contracts.usdc}</span>
+            <span className="text-cyan-400 select-all break-all font-mono text-[10px] leading-normal">
+              {data.contracts.usdc}
+            </span>
           </div>
         </div>
       </div>
