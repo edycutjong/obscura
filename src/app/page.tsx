@@ -442,10 +442,20 @@ export default function Home() {
       <footer className="bg-black/50 border-t border-white/5 py-8 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-500 gap-4">
         <div>&copy; 2026 OBSCURA. Trade finance privacy unlocked.</div>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-white transition-colors">
+          <a
+            href="https://github.com/edycutjong/obscura#readme"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors"
+          >
             SPECIFICATION
           </a>
-          <a href="#" className="hover:text-white transition-colors">
+          <a
+            href="https://github.com/edycutjong/obscura/blob/main/AUDIT_REPORT.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors"
+          >
             SECURITY AUDIT
           </a>
           <Link href="/terms" className="hover:text-white transition-colors">
