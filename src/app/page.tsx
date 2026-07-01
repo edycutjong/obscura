@@ -24,38 +24,52 @@ export default function Home() {
       return;
     }
 
-    if (typeof window !== 'undefined' && (window as any).stellar) {
-      try {
-        if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
-          (window as any).addTelemetryLog('WALLET: Requesting key from Freighter extension...');
-        }
-        const pubKey = await (window as any).stellar.getPublicKey();
-        if (pubKey) {
-          setWalletAddress(pubKey);
-          setWalletConnected(true);
-          setSandboxMode(false); // automatically switch to testnet integration
-          if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
-            (window as any).addTelemetryLog(
-              `WALLET: Connected via Freighter: ${pubKey.substring(0, 12)}...`
-            );
-          }
-        }
-      } catch (err: any) {
-        console.error('Wallet connection rejected:', err);
+    try {
+      const { isConnected, requestAccess } = await import('@stellar/freighter-api');
+
+      const connection = await isConnected();
+      if (!connection.isConnected) {
         if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
           (window as any).addTelemetryLog(
-            `WALLET ERROR: Connection rejected: ${err.message || err}`
+            'WALLET: Freighter extension not detected. Use the Demo button to explore the sandbox.'
           );
         }
+        return;
       }
-    } else {
-      setWalletAddress('GC32XOYF2E64VS6HNEO3NS3J34J7VWLX7P73L5J5Z6R4M5Y3H2R7OWSS');
+
+      if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+        (window as any).addTelemetryLog('WALLET: Requesting key from Freighter extension...');
+      }
+      const access = await requestAccess();
+      if (access.error || !access.address) {
+        throw new Error(access.error ? String(access.error) : 'No account returned by Freighter.');
+      }
+      setWalletAddress(access.address);
       setWalletConnected(true);
+      setSandboxMode(false); // automatically switch to testnet integration
       if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
         (window as any).addTelemetryLog(
-          `WALLET: Freighter extension not detected. Using Sandbox key GC32...OWSS`
+          `WALLET: Connected via Freighter: ${access.address.substring(0, 12)}...`
         );
       }
+    } catch (err: any) {
+      console.error('Wallet connection rejected:', err);
+      if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+        (window as any).addTelemetryLog(`WALLET ERROR: Connection rejected: ${err.message || err}`);
+      }
+    }
+  };
+
+  // Predefined demo identity — no wallet extension required. Stays in sandbox
+  // mode so nothing is broadcast; purely for exploring the console UI.
+  const handleDemoWallet = () => {
+    setWalletAddress('GC32XOYF2E64VS6HNEO3NS3J34J7VWLX7P73L5J5Z6R4M5Y3H2R7OWSS');
+    setWalletConnected(true);
+    setSandboxMode(true);
+    if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+      (window as any).addTelemetryLog(
+        'WALLET: Sandbox key GC32...OWSS loaded (demo — no wallet required).'
+      );
     }
   };
   const [faqs, setFaqs] = useState([
@@ -133,18 +147,31 @@ export default function Home() {
           </a>
         </nav>
 
-        <button
-          onClick={handleConnectWallet}
-          className={`font-mono text-xs font-bold tracking-widest px-4 py-2 rounded-lg border transition-all ${
-            walletConnected
-              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
-              : 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20'
-          }`}
-        >
-          {walletConnected
-            ? `WALLET: ${walletAddress.substring(0, 6)}...${walletAddress.substring(52)}`
-            : 'CONNECT WALLET'}
-        </button>
+        {walletConnected ? (
+          <button
+            onClick={handleConnectWallet}
+            title={sandboxMode ? 'Sandbox demo identity' : walletAddress}
+            className="font-mono text-xs font-bold tracking-widest px-4 py-2 rounded-lg border bg-emerald-500/10 border-emerald-500/30 text-emerald-400 transition-all"
+          >
+            {`WALLET: ${walletAddress.substring(0, 6)}...${walletAddress.substring(52)}`}
+          </button>
+        ) : (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleConnectWallet}
+              className="font-mono text-xs font-bold tracking-widest px-4 py-2 rounded-lg border bg-cyan-500/10 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 transition-all"
+            >
+              CONNECT WALLET
+            </button>
+            <button
+              onClick={handleDemoWallet}
+              title="Load a predefined demo identity — no wallet extension required"
+              className="font-mono text-xs font-bold tracking-widest px-3 py-2 rounded-lg border border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 transition-all"
+            >
+              DEMO
+            </button>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}

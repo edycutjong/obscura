@@ -252,70 +252,77 @@ export default function BuyerConsole({ isSandbox, buyerAddress }: BuyerConsolePr
           nativeToScVal(BigInt(invoiceAmount))
         );
 
-        if (typeof window !== 'undefined' && (window as any).stellar) {
-          if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
-            (window as any).addTelemetryLog(
-              `FREIGHTER: Fetching sequence number for source account: ${buyerAddress}`
-            );
-          }
-
-          // Fetch the account sequence number
-          const account = await server.getAccount(buyerAddress);
-
-          // Construct transaction
-          const tx = new TransactionBuilder(account, {
-            fee: '100000',
-            networkPassphrase: Networks.TESTNET,
-          })
-            .addOperation(callOp)
-            .setTimeout(30)
-            .build();
-
-          const xdrTx = tx.toXDR();
-
-          if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
-            (window as any).addTelemetryLog(
-              `FREIGHTER: Requesting corporate signature for on-chain compliance validation...`
-            );
-          }
-
-          const signedTx = await (window as any).stellar.signTransaction(xdrTx, {
-            networkPassphrase: Networks.TESTNET,
-          });
-
-          if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
-            (window as any).addTelemetryLog(
-              `STELLAR TESTNET: Submitting settlement transaction to Soroban RPC...`
-            );
-          }
-
-          const sendResponse = await server.sendTransaction(signedTx);
-          if (sendResponse.status === 'ERROR') {
-            throw new Error(`RPC send error: ${JSON.stringify(sendResponse.errorResult)}`);
-          }
-
-          // Poll for status
-          let txStatus = await server.getTransaction(sendResponse.hash);
-          let attempts = 0;
-          while (txStatus.status === 'NOT_FOUND' && attempts < 10) {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            txStatus = await server.getTransaction(sendResponse.hash);
-            attempts++;
-          }
-
-          if (txStatus.status === 'SUCCESS') {
-            if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
-              (window as any).addTelemetryLog(
-                `STELLAR TESTNET: Transaction finalized successfully! Hash: ${sendResponse.hash}`
-              );
-            }
-          } else {
-            throw new Error(`Transaction failed with status: ${txStatus.status}`);
-          }
-        } else {
+        const { isConnected, signTransaction } = await import('@stellar/freighter-api');
+        const connection = await isConnected();
+        if (!connection.isConnected) {
           throw new Error(
             'Freighter wallet not detected. Install Freighter browser extension to settle on Testnet.'
           );
+        }
+
+        if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+          (window as any).addTelemetryLog(
+            `FREIGHTER: Fetching sequence number for source account: ${buyerAddress}`
+          );
+        }
+
+        // Fetch the account sequence number
+        const account = await server.getAccount(buyerAddress);
+
+        // Construct transaction
+        const tx = new TransactionBuilder(account, {
+          fee: '100000',
+          networkPassphrase: Networks.TESTNET,
+        })
+          .addOperation(callOp)
+          .setTimeout(30)
+          .build();
+
+        const xdrTx = tx.toXDR();
+
+        if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+          (window as any).addTelemetryLog(
+            `FREIGHTER: Requesting corporate signature for on-chain compliance validation...`
+          );
+        }
+
+        const signResult = await signTransaction(xdrTx, {
+          networkPassphrase: Networks.TESTNET,
+          address: buyerAddress,
+        });
+        if (signResult.error) {
+          throw new Error(`Freighter signing failed: ${JSON.stringify(signResult.error)}`);
+        }
+
+        if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+          (window as any).addTelemetryLog(
+            `STELLAR TESTNET: Submitting settlement transaction to Soroban RPC...`
+          );
+        }
+
+        const signedTxObj = TransactionBuilder.fromXDR(signResult.signedTxXdr, Networks.TESTNET);
+        const sendResponse = await server.sendTransaction(signedTxObj);
+        if (sendResponse.status === 'ERROR') {
+          throw new Error(`RPC send error: ${JSON.stringify(sendResponse.errorResult)}`);
+        }
+
+        // Poll for status
+        let txStatus = await server.getTransaction(sendResponse.hash);
+        let attempts = 0;
+        while (txStatus.status === 'NOT_FOUND' && attempts < 10) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          txStatus = await server.getTransaction(sendResponse.hash);
+          attempts++;
+        }
+
+        if (txStatus.status === 'SUCCESS') {
+          if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+            (window as any).addTelemetryLog(
+              `STELLAR TESTNET: Transaction finalized successfully! Hash: ${sendResponse.hash}`
+            );
+          }
+        } else {
+          throw new Error(`Transaction failed with status: ${txStatus.status}`);
         }
       } catch (err: any) {
         if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {

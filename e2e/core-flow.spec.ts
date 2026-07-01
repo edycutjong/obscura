@@ -20,11 +20,15 @@ test.describe('Obscura Core Settlement Flow', () => {
   test('should simulate mock wallet connection', async ({ page }) => {
     await page.goto('/');
 
-    const walletButton = page.locator('header button');
-    await expect(walletButton).toBeVisible();
+    const connectButton = page.getByRole('button', { name: /CONNECT WALLET/i });
+    await expect(connectButton).toBeVisible();
 
-    // Connect wallet
-    await walletButton.click();
-    await expect(walletButton).toContainText(/GC32/i);
+    // Real Freighter needs the browser extension, unavailable in CI — the Demo
+    // button loads a predefined sandbox identity instead.
+    const demoButton = page.getByRole('button', { name: /^DEMO$/i });
+    await demoButton.click();
+
+    // After connecting, the header button shows the connected sandbox address
+    await expect(page.getByRole('button', { name: /GC32/i })).toBeVisible();
   });
 });
