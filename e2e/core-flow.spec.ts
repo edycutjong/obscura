@@ -28,7 +28,7 @@ test.describe('Obscura Core Settlement Flow', () => {
     const demoButton = page.getByRole('button', { name: /^DEMO$/i });
     await demoButton.click();
 
-    // After connecting, the header button shows the connected sandbox address
-    await expect(page.getByRole('button', { name: /GC32/i })).toBeVisible();
+    // After connecting, the header shows the connected sandbox address
+    await expect(page.locator('header').getByText(/GC32/i)).toBeVisible();
   });
 });

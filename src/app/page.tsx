@@ -5,6 +5,7 @@ import SupplierPortal from '@/components/SupplierPortal';
 import BuyerConsole from '@/components/BuyerConsole';
 import TelemetryConsole from '@/components/TelemetryConsole';
 import AnomaliesDemo from '@/components/AnomaliesDemo';
+import Link from 'next/link';
 
 export default function Home() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -15,15 +16,6 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'buyer' | 'supplier'>('buyer');
 
   const handleConnectWallet = async () => {
-    if (walletConnected) {
-      setWalletConnected(false);
-      setWalletAddress('GC32XOYF2E64VS6HNEO3NS3J34J7VWLX7P73L5J5Z6R4M5Y3H2R7OWSS');
-      if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
-        (window as any).addTelemetryLog('WALLET: Disconnected.');
-      }
-      return;
-    }
-
     try {
       const { isConnected, requestAccess } = await import('@stellar/freighter-api');
 
@@ -70,6 +62,15 @@ export default function Home() {
       (window as any).addTelemetryLog(
         'WALLET: Sandbox key GC32...OWSS loaded (demo — no wallet required).'
       );
+    }
+  };
+
+  const handleDisconnectWallet = () => {
+    setWalletConnected(false);
+    setWalletAddress('GC32XOYF2E64VS6HNEO3NS3J34J7VWLX7P73L5J5Z6R4M5Y3H2R7OWSS');
+    setSandboxMode(true);
+    if (typeof window !== 'undefined' && (window as any).addTelemetryLog) {
+      (window as any).addTelemetryLog('WALLET: Disconnected.');
     }
   };
   const [faqs, setFaqs] = useState([
@@ -148,13 +149,21 @@ export default function Home() {
         </nav>
 
         {walletConnected ? (
-          <button
-            onClick={handleConnectWallet}
-            title={sandboxMode ? 'Sandbox demo identity' : walletAddress}
-            className="font-mono text-xs font-bold tracking-widest px-4 py-2 rounded-lg border bg-emerald-500/10 border-emerald-500/30 text-emerald-400 transition-all"
-          >
-            {`WALLET: ${walletAddress.substring(0, 6)}...${walletAddress.substring(52)}`}
-          </button>
+          <div className="flex items-center gap-2">
+            <span
+              title={sandboxMode ? 'Sandbox demo identity' : walletAddress}
+              className="font-mono text-xs font-bold tracking-widest px-4 py-2 rounded-lg border bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
+            >
+              {`WALLET: ${walletAddress.substring(0, 6)}...${walletAddress.substring(52)}`}
+            </span>
+            <button
+              onClick={handleDisconnectWallet}
+              title="Disconnect wallet"
+              className="font-mono text-xs font-bold tracking-widest px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+            >
+              DISCONNECT
+            </button>
+          </div>
         ) : (
           <div className="flex items-center gap-2">
             <button
@@ -439,9 +448,12 @@ export default function Home() {
           <a href="#" className="hover:text-white transition-colors">
             SECURITY AUDIT
           </a>
-          <a href="#" className="hover:text-white transition-colors">
+          <Link href="/terms" className="hover:text-white transition-colors">
             TERMS OF USE
-          </a>
+          </Link>
+          <Link href="/privacy" className="hover:text-white transition-colors">
+            PRIVACY POLICY
+          </Link>
         </div>
       </footer>
     </div>
