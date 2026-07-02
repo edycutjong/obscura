@@ -443,7 +443,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-black/50 border-t border-white/5 py-8 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-500 gap-4">
-        <div>&copy; 2026 OBSCURA. Trade finance privacy unlocked.</div>
+        <div>
+          &copy; 2026 OBSCURA. Trade finance privacy unlocked. · v
+          {process.env.NEXT_PUBLIC_APP_VERSION}
+        </div>
         <div className="flex gap-6">
           <a
             href="https://github.com/edycutjong/obscura#readme"
