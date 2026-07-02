@@ -6,6 +6,7 @@ import BuyerConsole from '@/components/BuyerConsole';
 import TelemetryConsole from '@/components/TelemetryConsole';
 import AnomaliesDemo from '@/components/AnomaliesDemo';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -107,8 +108,10 @@ export default function Home() {
       {/* Navigation */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-gray-950/60 border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center transition-all">
         <div className="flex items-center gap-3">
-          <img
+          <Image
             src="/icon.svg"
+            width={32}
+            height={32}
             className="w-8 h-8 filter drop-shadow-[0_0_8px_var(--primary-glow)]"
             alt="Obscura Logo"
           />
