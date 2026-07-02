@@ -6,7 +6,8 @@
 
   <p><strong>✅ Real Noir/UltraHonk proof verified on Stellar testnet.</strong><br/>
   Reproduce with <code>npm run prove:demo</code> — settlement contract <code>CD6BRQ7OB3AEDGZPR6JP5ZI6HZGCQ3OTCFVDAELN7QKQF3XRAXPXW3RO</code>; a fresh Barretenberg UltraHonk proof makes <code>verify_invoice_proof</code> return true on-chain, and tampered inputs are rejected.<br/>
-  <em>Honest status: the hosted web app is a demo sandbox (local crypto simulations for UX); the load-bearing ZK is the prove:demo pipeline plus the deployed contract.</em></p>
+  <strong>Don&rsquo;t trust us — verify it in your browser:</strong> click <strong>&ldquo;Verify a real proof on-chain&rdquo;</strong> on the <a href="https://obscura.edycu.dev">live site</a> (no wallet needed) — a read-only Soroban call returns <code>true</code> for a real proof and <code>false</code> for tampered inputs.<br/>
+  <em>Honest status: the interactive console uses local crypto simulations for UX; the load-bearing ZK is that deployed contract plus <code>npm run prove:demo</code> — both now witnessable from the site itself.</em></p>
 
   <br/>
 
