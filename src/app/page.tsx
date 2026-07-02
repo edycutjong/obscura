@@ -7,6 +7,7 @@ import TelemetryConsole from '@/components/TelemetryConsole';
 import AnomaliesDemo from '@/components/AnomaliesDemo';
 import Link from 'next/link';
 import Image from 'next/image';
+import VerifyOnchainPanel from '@/components/VerifyOnchainPanel';
 
 export default function Home() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -185,6 +186,9 @@ export default function Home() {
           </div>
         )}
       </header>
+
+      {/* Real on-chain ZK verification (witnessable, no wallet) */}
+      <VerifyOnchainPanel />
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 px-6 md:px-12 flex flex-col items-center text-center gap-8 max-w-4xl mx-auto">
