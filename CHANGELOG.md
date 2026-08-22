@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.1](../../compare/v1.7.0...v1.7.1) (2026-08-22)
+
+### 🐛 Bug Fixes
+
+- **deps:** resolve 8 dependency vulnerabilities via lockfile (1cc1a4f)
+
+### 🔧 Chores
+
+- **deps-dev:** bump tsx from 4.23.9 to 4.23.12 (#46) (5dd9e29)
+- **deps-dev:** bump prettier from 3.9.5 to 3.9.6 (#33) (4e18ccf)
+- **deps-dev:** bump tsx from 4.23.0 to 4.23.9 (#34) (1eabc57)
+- **deps-dev:** bump tailwindcss from 4.3.2 to 4.3.3 (#35) (e53b413)
+- **deps:** bump next from 16.2.10 to 16.3.0 (#37) (0f370b2)
+- **deps:** bump @supabase/supabase-js from 2.110.2 to 2.112.1 (#38) (630aee3)
+- **deps-dev:** bump @playwright/test from 1.61.0 to 1.62.1 (#39) (f055f81)
+- remove agent instruction files from public repo (e65d702)
+- **deps-dev:** bump eslint-config-next from 16.2.9 to 16.3.0 (#14) (8992700)
+- **deps-dev:** bump @tailwindcss/postcss from 4.3.1 to 4.3.2 (#15) (5e3ae26)
+- **deps-dev:** bump tailwindcss from 4.3.1 to 4.3.2 (#16) (a5d17fd)
+- **deps:** bump next from 16.2.9 to 16.2.10 (#17) (2e6e522)
+- **deps-dev:** bump tsx from 4.22.4 to 4.23.0 (#18) (1832d30)
+- **deps:** bump @supabase/supabase-js from 2.108.2 to 2.110.2 (#24) (2f984e9)
+- **deps-dev:** bump prettier from 3.8.4 to 3.9.5 (#25) (5c1f111)
+
+### 📝 Documentation
+
+- **readme:** link the hook contract ID to stellar.expert (800c569)
+- **readme:** point judges at the one-click on-chain verify (76b2030)
+
 ## [1.7.0](../../compare/v1.6.0...v1.7.0) (2026-07-02)
 
 ### 🚀 Features
